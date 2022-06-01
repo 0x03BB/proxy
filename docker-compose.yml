@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  proxy:
+    build: ./build
+    image: ${DOCKER_REGISTRY}nginx-no-default:${DOCKER_TAG:-latest}
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - "proxy-config:/etc/nginx/conf.d"
+
+volumes:
+  proxy-config:
+    name: "proxy-config"
